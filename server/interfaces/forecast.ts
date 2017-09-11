@@ -1,6 +1,7 @@
 import {
     IClouds,
     IMain,
+    IRain,
     ISnow,
     ISys,
     IWeather,
@@ -12,7 +13,8 @@ export interface IForecast {
     dt: number;
     dt_txt: string;
     main: IMain;
-    snow: ISnow;
+    rain?: IRain;
+    snow?: ISnow;
     sys: ISys;
     weather: IWeather[];
     wind: IWind;

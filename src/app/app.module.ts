@@ -11,6 +11,7 @@ import {
   AppConfig,
 } from './core/config';
 import { ExceptionService } from './core/exception/exception.service';
+import { DailyWeatherWidgetComponent } from './daily-weather-widget/daily-weather-widget.component';
 import { WeatherWidgetComponent } from './weather-widget/weather-widget.component';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { WeatherWidgetComponent } from './weather-widget/weather-widget.componen
     AppComponent,
     CitySelectorComponent,
     WeatherWidgetComponent,
+    DailyWeatherWidgetComponent,
   ],
   imports: [
     BrowserModule,

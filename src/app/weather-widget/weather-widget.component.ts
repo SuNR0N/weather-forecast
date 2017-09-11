@@ -5,12 +5,12 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
+import { DailyForecast } from '../shared/daily-forecast';
 import {
   ICity,
   ICityForecast,
+  IForecast,
 } from '../shared/interfaces';
-import { IForecast } from '../shared/interfaces/forecast';
-import { DailyForecast } from './daily-forecast.model';
 import { ForecastService } from './forecast.service';
 
 @Component({
@@ -23,9 +23,10 @@ export class WeatherWidgetComponent implements OnChanges {
   @Input()
   public city: ICity;
 
-  public cityForecast: ICityForecast;
   public dailyForecast: DailyForecast;
   public dailyForecasts: DailyForecast[];
+
+  private cityForecast: ICityForecast;
 
   constructor(private forecastService: ForecastService) { }
 
@@ -56,10 +57,9 @@ export class WeatherWidgetComponent implements OnChanges {
       }
     });
     const dailyForecasts: DailyForecast[] = [];
-    for (const forecasts of Array.from(map.values())) {
+    for (const forecasts of map.values()) {
       dailyForecasts.push(new DailyForecast(forecasts));
     }
-    console.log(dailyForecasts);
     return dailyForecasts;
   }
 }

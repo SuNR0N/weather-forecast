@@ -5,6 +5,7 @@ export * from './coordinate';
 export * from './forecast';
 export * from './http-error';
 export * from './main';
+export * from './rain';
 export * from './snow';
 export * from './sys';
 export * from './weather';

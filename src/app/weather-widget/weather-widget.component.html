@@ -1,4 +1,5 @@
-<div class="weatherWidget">
+<div class="weatherWidget"
+     *ngIf="city">
   <div class="title">
     <span>{{ city?.name }}, {{ city?.country }}</span>
     <span>{{ dailyForecast?.day }}</span>
@@ -8,23 +9,29 @@
     <div class="main">
       <i class="fa"
          [ngClass]="dailyForecast?.icon"></i>
-      <span>{{ dailyForecast?.temperature }}</span>
+      <span *ngIf="dailyForecast?.isToday()">{{ dailyForecast?.temperature }}</span>
+      <span *ngIf="!dailyForecast?.isToday()">{{ dailyForecast?.avgTemperature }}</span>
+      <span>{{ dailyForecast?.maxTemperature }}</span>
+      <span>{{ dailyForecast?.minTemperature }}</span>
     </div>
     <div class="details">
-      <span *ngIf="dailyForecast?.rain">Rain: {{ dailyForecast?.rain | number }}mm</span>
-      <span *ngIf="dailyForecast?.snow">Snow: {{ dailyForecast?.snow | number }}mm</span>
-      <span>Humidity: {{ dailyForecast?.humidity }}%</span>
-      <span>Wind: {{ dailyForecast?.wind | number }}mph</span>
+      <div *ngIf="dailyForecast?.isToday()">
+        <span *ngIf="dailyForecast?.rain">Rain: {{ dailyForecast?.rain | number }}mm</span>
+        <span *ngIf="dailyForecast?.snow">Snow: {{ dailyForecast?.snow | number }}mm</span>
+        <span>Humidity: {{ dailyForecast?.humidity }}%</span>
+        <span>Wind: {{ dailyForecast?.wind | number }}mph</span>
+      </div>
+      <div *ngIf="!dailyForecast?.isToday()">
+          <span *ngIf="dailyForecast?.totalRain">Rain: {{ dailyForecast?.totalRain | number }}mm</span>
+          <span *ngIf="dailyForecast?.totalSnow">Snow: {{ dailyForecast?.totalSnow | number }}mm</span>
+          <span>Humidity: {{ dailyForecast?.avgHumidity }}%</span>
+          <span>Wind: {{ dailyForecast?.avgWind | number }}mph</span>
+      </div>
     </div>
   </div>
   <div class="forecast">
-    <div *ngFor="let forecast of dailyForecasts; let i = index"
-        (click)="selectForecast(i)">
-      <span>{{ forecast.day }}</span>
-      <i class="fa"
-         [ngClass]="forecast.mainIcon"></i>
-      <span>{{ forecast.maxTemperature }}</span>
-      <span>{{ forecast.minTemperature }}</span>
-    </div>
+    <wf-daily-weather-widget *ngFor="let forecast of dailyForecasts; let i = index"
+                              [forecast]="forecast"                     
+                              (click)="selectForecast(i)"></wf-daily-weather-widget>
   </div>
 </div>

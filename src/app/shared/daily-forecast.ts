@@ -34,6 +34,12 @@ export class DailyForecast {
         return days[day];
     }
 
+    public isToday(): boolean {
+        const today = new Date().toDateString();
+        const forecastDay = new Date(this.closestForecast.dt * 1000).toDateString();
+        return today === forecastDay;
+    }
+
     public get description(): string {
         if (this.closestForecast && this.closestForecast.weather[0]) {
             return this.closestForecast.weather[0].description;
@@ -54,6 +60,15 @@ export class DailyForecast {
         return Math.round(this.closestForecast.main.temp - kelvin);
     }
 
+    public get avgTemperature(): number {
+        const temperatures = this.forecasts.map((forecast) => forecast.main.temp);
+        const sum = temperatures.reduce((previous, current) => {
+            previous += current;
+            return previous;
+        }, 0);
+        return Math.round(sum / temperatures.length - kelvin);
+    }
+
     public get minTemperature(): number {
         const minimums = this.forecasts.map((forecast) => forecast.main.temp_min);
         return Math.round(Math.min(...minimums) - kelvin);
@@ -68,16 +83,54 @@ export class DailyForecast {
         return (this.closestForecast.rain && this.closestForecast.rain['3h']) || 0;
     }
 
+    public get totalRain(): number {
+        const total = this.forecasts.reduce((previous, current) => {
+            if (current.rain && current.rain['3h']) {
+                previous += current.rain['3h'];
+            }
+            return previous;
+        }, 0);
+        return total;
+    }
+
     public get snow(): number {
         return (this.closestForecast.snow && this.closestForecast.snow['3h']) || 0;
+    }
+
+    public get totalSnow(): number {
+        const total = this.forecasts.reduce((previous, current) => {
+            if (current.snow && current.snow['3h']) {
+                previous += current.snow['3h'];
+            }
+            return previous;
+        }, 0);
+        return total;
     }
 
     public get humidity(): number {
         return this.closestForecast.main.humidity;
     }
 
+    public get avgHumidity(): number {
+        const humidities = this.forecasts.map((forecast) => forecast.main.humidity);
+        const sum = humidities.reduce((previous, current) => {
+            previous += current;
+            return previous;
+        }, 0);
+        return sum / humidities.length;
+    }
+
     public get wind(): number {
         return this.closestForecast.wind.speed * mpsToMphConversionRate;
+    }
+
+    public get avgWind(): number {
+        const winds = this.forecasts.map((forecast) => forecast.wind.speed);
+        const sum = winds.reduce((previous, current) => {
+            previous += current;
+            return previous;
+        }, 0);
+        return sum / winds.length;
     }
 
     public get mainIcon(): string {
