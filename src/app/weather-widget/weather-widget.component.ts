@@ -26,23 +26,20 @@ export class WeatherWidgetComponent implements OnChanges {
   public dailyForecast: DailyForecast;
   public dailyForecasts: DailyForecast[];
 
-  private cityForecast: ICityForecast;
-
   constructor(private forecastService: ForecastService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.city.currentValue) {
       this.forecastService.getForecastForCity(changes.city.currentValue)
         .subscribe((result) => {
-          this.cityForecast = result;
-          this.dailyForecasts = this.getDailyForecasts(this.cityForecast);
+          this.dailyForecasts = this.getDailyForecasts(result);
           this.dailyForecast = this.dailyForecasts[0];
         });
     }
   }
 
-  public selectForecast(index: number) {
-    this.dailyForecast = this.dailyForecasts[index];
+  public selectForecast(forecast: DailyForecast) {
+    this.dailyForecast = forecast;
   }
 
   private getDailyForecasts(cityForecast: ICityForecast): DailyForecast[] {

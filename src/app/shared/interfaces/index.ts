@@ -3,6 +3,7 @@ export * from './city-forecast';
 export * from './city';
 export * from './clouds';
 export * from './coordinate';
+export * from './daily-forecast';
 export * from './forecast';
 export * from './http-error';
 export * from './main';

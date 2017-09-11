@@ -1,7 +1,9 @@
 <div class="dailyWeatherWidget">
-  <span>{{ forecast.day }}</span>
-  <i class="fa"
-     [ngClass]="forecast.mainIcon"></i>
-  <span>{{ forecast.maxTemperature }}</span>
-  <span>{{ forecast.minTemperature }}</span>
+  <div class="day">{{ forecast?.day }}</div>
+  <i class="fa fa-2x"
+     [ngClass]="forecast && forecast.mainIcon"></i>
+  <div class="temperatures">
+    <span class="temperature-max">{{ forecast?.maxTemperature }}</span>
+    <span class="temperature-min">{{ forecast?.minTemperature }}</span>
+  </div>
 </div>

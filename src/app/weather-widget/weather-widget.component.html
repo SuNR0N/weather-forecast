@@ -1,37 +1,39 @@
 <div class="weatherWidget"
-     *ngIf="city">
-  <div class="title">
-    <span>{{ city?.name }}, {{ city?.country }}</span>
-    <span>{{ dailyForecast?.day }}</span>
-    <span>{{ dailyForecast?.description }}</span>
-  </div>
+      *ngIf="city">
+  <div class="city">{{ city?.name }}, {{ city?.country }}</div>
+  <div>{{ dailyForecast?.day }}</div>
+  <div class="description">{{ dailyForecast?.description }}</div>
   <div class="info">
     <div class="main">
-      <i class="fa"
+      <i class="fa fa-3x"
          [ngClass]="dailyForecast?.icon"></i>
-      <span *ngIf="dailyForecast?.isToday()">{{ dailyForecast?.temperature }}</span>
-      <span *ngIf="!dailyForecast?.isToday()">{{ dailyForecast?.avgTemperature }}</span>
-      <span>{{ dailyForecast?.maxTemperature }}</span>
-      <span>{{ dailyForecast?.minTemperature }}</span>
+      <div class="temperature">
+        <span *ngIf="dailyForecast?.isToday()">{{ dailyForecast?.temperature }}</span>
+        <span *ngIf="!dailyForecast?.isToday()">{{ dailyForecast?.avgTemperature }}</span>
+      </div>
+      <span class="celsius">°C</span>
     </div>
     <div class="details">
+      <div>Max Temperature: {{ dailyForecast?.maxTemperature }}°C</div>
+      <div>Min Temperature: {{ dailyForecast?.minTemperature }}°C</div>
       <div *ngIf="dailyForecast?.isToday()">
-        <span *ngIf="dailyForecast?.rain">Rain: {{ dailyForecast?.rain | number }}mm</span>
-        <span *ngIf="dailyForecast?.snow">Snow: {{ dailyForecast?.snow | number }}mm</span>
-        <span>Humidity: {{ dailyForecast?.humidity }}%</span>
-        <span>Wind: {{ dailyForecast?.wind | number }}mph</span>
+        <div *ngIf="dailyForecast?.rain">Rain: {{ dailyForecast?.rain | number }} mm</div>
+        <div *ngIf="dailyForecast?.snow">Snow: {{ dailyForecast?.snow | number }} mm</div>
+        <div>Humidity: {{ dailyForecast?.humidity }}%</div>
+        <div>Wind: {{ dailyForecast?.wind | number }} mph</div>
       </div>
       <div *ngIf="!dailyForecast?.isToday()">
-          <span *ngIf="dailyForecast?.totalRain">Rain: {{ dailyForecast?.totalRain | number }}mm</span>
-          <span *ngIf="dailyForecast?.totalSnow">Snow: {{ dailyForecast?.totalSnow | number }}mm</span>
-          <span>Humidity: {{ dailyForecast?.avgHumidity }}%</span>
-          <span>Wind: {{ dailyForecast?.avgWind | number }}mph</span>
+        <div *ngIf="dailyForecast?.rain">Rain: {{ dailyForecast?.totalRain | number }} mm</div>
+        <div *ngIf="dailyForecast?.snow">Snow: {{ dailyForecast?.totalSnow | number }} mm</div>
+        <div>Humidity: {{ dailyForecast?.avgHumidity }}%</div>
+        <div>Wind: {{ dailyForecast?.avgWind | number }} mph</div>
       </div>
     </div>
   </div>
   <div class="forecast">
-    <wf-daily-weather-widget *ngFor="let forecast of dailyForecasts; let i = index"
-                              [forecast]="forecast"                     
-                              (click)="selectForecast(i)"></wf-daily-weather-widget>
+    <wf-daily-weather-widget *ngFor="let forecast of dailyForecasts"
+                              [forecast]="forecast"
+                              [ngClass]="{ 'selected': dailyForecast === forecast }"
+                              (click)="selectForecast(forecast)"></wf-daily-weather-widget>
   </div>
 </div>

@@ -1,4 +1,7 @@
-import { IForecast } from '../shared/interfaces/forecast';
+import {
+    IDailyForecast,
+    IForecast,
+} from '../shared/interfaces';
 
 const days = [
     'Sunday',
@@ -9,7 +12,6 @@ const days = [
     'Friday',
     'Saturday',
 ];
-
 const mpsToMphConversionRate = 2.236936;
 const kelvin = 273.15;
 
@@ -20,7 +22,7 @@ enum Icon {
     Snow = 'fa-snowflake-o',
 }
 
-export class DailyForecast {
+export class DailyForecast implements IDailyForecast {
     public forecasts: IForecast[];
     private closestForecast: IForecast;
 

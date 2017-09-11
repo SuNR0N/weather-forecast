@@ -1,8 +1,17 @@
+import { HttpClientModule } from '@angular/common/http';
 import {
   async,
   ComponentFixture,
   TestBed,
 } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { TypeaheadModule } from 'ngx-bootstrap';
+
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../core/config';
+import { ExceptionService } from '../core/exception/exception.service';
 import { CitySelectorComponent } from './city-selector.component';
 
 
@@ -12,7 +21,19 @@ describe('CitySelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        HttpClientModule,
+        TypeaheadModule.forRoot(),
+      ],
       declarations: [ CitySelectorComponent ],
+      providers: [
+        {
+          provide: APP_CONFIG,
+          useValue: AppConfig,
+        },
+        ExceptionService,
+      ],
     })
     .compileComponents();
   }));

@@ -1,0 +1,15 @@
+.dailyWeatherWidget {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .temperatures {
+        display: flex;
+        font-size: 1rem;
+        justify-content: space-around;
+
+        .temperature-min {
+            color: #bababa;
+        }
+    }
+}

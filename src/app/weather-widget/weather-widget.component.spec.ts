@@ -1,5 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '../core/config';
+import { ExceptionService } from '../core/exception/exception.service';
+import { DailyWeatherWidgetComponent } from '../daily-weather-widget/daily-weather-widget.component';
 import { WeatherWidgetComponent } from './weather-widget.component';
 
 describe('WeatherWidgetComponent', () => {
@@ -8,7 +19,20 @@ describe('WeatherWidgetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WeatherWidgetComponent ]
+      imports: [
+        HttpClientModule,
+      ],
+      declarations: [
+        WeatherWidgetComponent,
+        DailyWeatherWidgetComponent,
+      ],
+      providers: [
+        {
+          provide: APP_CONFIG,
+          useValue: AppConfig,
+        },
+        ExceptionService,
+      ],
     })
     .compileComponents();
   }));

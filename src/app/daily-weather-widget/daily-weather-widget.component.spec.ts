@@ -1,4 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 
 import { DailyWeatherWidgetComponent } from './daily-weather-widget.component';
 
@@ -8,7 +12,7 @@ describe('DailyWeatherWidgetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DailyWeatherWidgetComponent ]
+      declarations: [ DailyWeatherWidgetComponent ],
     })
     .compileComponents();
   }));
