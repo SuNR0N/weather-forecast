@@ -1,0 +1,30 @@
+<div class="weatherWidget">
+  <div class="title">
+    <span>{{ city?.name }}, {{ city?.country }}</span>
+    <span>{{ dailyForecast?.day }}</span>
+    <span>{{ dailyForecast?.description }}</span>
+  </div>
+  <div class="info">
+    <div class="main">
+      <i class="fa"
+         [ngClass]="dailyForecast?.icon"></i>
+      <span>{{ dailyForecast?.temperature }}</span>
+    </div>
+    <div class="details">
+      <span *ngIf="dailyForecast?.rain">Rain: {{ dailyForecast?.rain | number }}mm</span>
+      <span *ngIf="dailyForecast?.snow">Snow: {{ dailyForecast?.snow | number }}mm</span>
+      <span>Humidity: {{ dailyForecast?.humidity }}%</span>
+      <span>Wind: {{ dailyForecast?.wind | number }}mph</span>
+    </div>
+  </div>
+  <div class="forecast">
+    <div *ngFor="let forecast of dailyForecasts; let i = index"
+        (click)="selectForecast(i)">
+      <span>{{ forecast.day }}</span>
+      <i class="fa"
+         [ngClass]="forecast.mainIcon"></i>
+      <span>{{ forecast.maxTemperature }}</span>
+      <span>{{ forecast.minTemperature }}</span>
+    </div>
+  </div>
+</div>

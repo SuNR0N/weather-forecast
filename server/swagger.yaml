@@ -1,0 +1,208 @@
+swagger: '2.0'
+info:
+  description: API specification for Weather Forecast
+  version: 1.0.0
+  title: Weather Forecast
+  contact:
+    email: annus.norbert@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'localhost:3000'
+basePath: /api
+tags:
+  - name: weather
+    description: Everything related to weather forecast
+schemes:
+  - http
+paths:
+  /cities:
+    get:
+      tags:
+        - weather
+      summary: Retrieves all cities matching the query string
+      description: ''
+      operationId: getCities
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: q
+          description: Partial city name
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/City'
+  '/forecasts/{cityId}':
+    get:
+      tags:
+        - weather
+      summary: Retrieves weather forecast for a given city
+      description: ''
+      operationId: getForecast
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: cityId
+          description: Id of a city
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/CityForecast'
+        '401':
+          description: Unauthorized
+        '404':
+          description: City not found
+definitions:
+  City:
+    type: object
+    required:
+      - coord
+      - country
+      - id
+      - name
+    properties:
+      coord:
+        $ref: '#/definitions/Coordinate'
+      country:
+        type: string
+      id:
+        type: number
+      name:
+        type: string
+  CityForecast:
+    type: object
+    required:
+      - city
+      - cnt
+      - cod
+      - list
+      - message
+    properties:
+      city:
+        $ref: '#/definitions/City'
+      cnt:
+        type: number
+      cod:
+        type: string
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/Forecast'
+      message:
+        type: number
+  Clouds:
+    required:
+      - all
+    properties:
+      all:
+        type: number
+  Coordinate:
+    required:
+      - lat
+      - lon
+    properties:
+      lat:
+        type: number
+      lon:
+        type: number
+  Forecast:
+    type: object
+    required:
+      - clouds
+      - dt
+      - dt_txt
+      - main
+      - snow
+      - sys
+      - weather
+      - wind
+    properties:
+      clouds:
+        $ref: '#/definitions/Clouds'
+      dt:
+        type: number
+      dt_txt:
+        type: string
+      main:
+        $ref: '#/definitions/Main'
+      snow:
+        $ref: '#/definitions/Snow'
+      sys:
+        $ref: '#/definitions/Sys'
+      weather:
+        type: array
+        items:
+          $ref: '#/definitions/Weather'
+      wind:
+        $ref: '#/definitions/Wind'
+  Main:
+    required:
+      - grnd_level
+      - humidity
+      - pressure
+      - sea_level
+      - temp
+      - temp_kf
+      - temp_max
+      - temp_min
+    properties:
+      grnd_level:
+        type: number
+      humidity:
+        type: number
+      pressure:
+        type: number
+      sea_level:
+        type: number
+      temp:
+        type: number
+      temp_kf:
+        type: number
+      temp_max:
+        type: number
+      temp_min:
+        type: number
+  Snow:
+    properties:
+      3h:
+        type: number
+  Sys:
+    required:
+      - pod
+    properties:
+      pod:
+        type: string
+  Weather:
+    required:
+      - description
+      - icon
+      - id
+      - main
+    properties:
+      description:
+        type: string
+      icon:
+        type: string
+      id:
+        type: number
+      main:
+        type: string
+  Wind:
+    required:
+      - speed
+      - deg
+    properties:
+      speed:
+        type: number
+      deg:
+        type: number

@@ -1,0 +1,19 @@
+<div class="wrapper">
+        <input [(ngModel)]="asyncSelected"
+                [typeahead]="dataSource"
+                (typeaheadLoading)="changeTypeaheadLoading($event)"
+                (typeaheadNoResults)="changeTypeaheadNoResults($event)"
+                (typeaheadOnSelect)="typeaheadOnSelect($event)"
+                typeaheadOptionsLimit="7"
+                typeaheadWaitMs="250"
+                typeaheadOptionField="name"
+                typeaheadGroupField="country"
+                placeholder="Select a city"
+                class="form-control">
+        <i class="fa fa-spinner fa-pulse" 
+           aria-hidden="true"
+           *ngIf="typeaheadLoading"></i>
+</div>
+<div *ngIf="typeaheadNoResults">
+        <i class="fa fa-times" aria-hidden="true"></i> No Results Found
+</div>
