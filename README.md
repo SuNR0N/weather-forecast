@@ -2,7 +2,7 @@
 
 This project demonstrates how to retrieve a 5 day weather forecast for a  selected city using the [API provided by OpenWeatherMap](http://openweathermap.org/forecast5) and display it as a widget on a page.
 
-Used Technologies & Tools
+Used Technologies & Tools:
 - [Angular](https://angular.io/)
 - [Angular CLI](https://cli.angular.io/)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -123,31 +123,39 @@ npm run server
 
 1. Create a `Heroku` acccount
 2. Install the `Heroku CLI`
-3. Cd into the root of your project directory
-4. Run `create` command
+3. Login with `Heroku CLI` to your account
+```sh
+heroku login
+```
+4. Cd into the root of your project directory
+5. Run `create` command
 ```sh
 heroku create
 ```
-5. Create a `postinstall` script which will kick off a production build
+6. Change the random generated name of your application
+```sh
+heroku apps:rename <new-name>
+```
+7. Create a `postinstall` script which will kick off a production build
 ```json
 "scripts": {
     "postinstall": "ng build --aot -prod"
 }
 ```
-6. Move all of those `devDependencies` to `dependencies` which are required to run the application as `Heroku` will install those only:
+8. Move all of those `devDependencies` to `dependencies` which are required to run the application as `Heroku` will install those only:
     - `@angular/cli`
     - `ts-node`
-7. Set logic in `Express` to serve static files from `dist/` directory
+9. Set logic in `Express` to serve static files from `dist/` directory
 ```typescript
 app.use(express.static(__dirname + '../dist'));
 ```
-8. Set `Express` to use the `PORT` environment variable by default for listening if it exists
+10. Set `Express` to use the `PORT` environment variable by default for listening if it exists
 ```typescript
 app.listen(process.env.PORT || config.port, () => {
     logger.info(`Server app is listening on port ${process.env.PORT || config.port}!`);
 })
 ```
-9. Handle default `PathLocationStrategy` of `Angular` in `Express`
+11. Handle default `PathLocationStrategy` of `Angular` in `Express`
 ```typescript
 import { join } from 'path';
 ...
@@ -155,11 +163,11 @@ app.get('/*', (req: express.Request, res: express.Response) => {
     res.sendFile(join(__dirname + '../dist/index.html'));
 });
 ```
-10. Set the API key as an environment variable on `Heroku`
+12. Set the API key as an environment variable on `Heroku`
 ```sh
 heroku config:set FORECAST_API_KEY=<Your OpenWeatherMap API Key>
 ```
-11. Push to `Heroku` to deploy the application
+13. Push to `Heroku` to deploy the application
 ```sh
 git add .
 git commit -m "Deploy to Heroku"

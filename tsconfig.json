@@ -16,6 +16,6 @@
       "dom"
     ],
     "noUnusedLocals": true,
-    "downlevelIteration": true 
+    "downlevelIteration": true
   }
 }

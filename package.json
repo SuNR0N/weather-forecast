@@ -19,7 +19,7 @@
     "swagger"
   ],
   "author": "Norbert Annus <annus.norbert@gmail.com>",
-  "homepage": "https://github.com/SuNR0N/angular-crud",
+  "homepage": "https://github.com/SuNR0N/weather-forecast",
   "scripts": {
     "ng": "ng",
     "start": "concurrently --kill-others \"yarn server\" \"ng serve --proxy-config config/proxy.conf.json\"",
@@ -27,9 +27,14 @@
     "test": "ng test -sm=false",
     "lint": "ng lint",
     "e2e": "concurrently --kill-others \"yarn server\" \"ng e2e --proxy-config config/proxy.conf.json\"",
-    "server": "ts-node --project ./server/tsconfig.server.json ./server/index.ts"
+    "server": "ts-node --project ./server/tsconfig.server.json ./server/index.ts",
+    "postinstall": "ng build --prod -aot"
   },
   "private": true,
+  "engines": {
+    "node": "8.2.1",
+    "npm": "5.3.0"
+  },
   "dependencies": {
     "@angular/animations": "^4.4.0-RC.0",
     "@angular/common": "^4.4.0-RC.0",
