@@ -40,6 +40,7 @@
     "@angular/cli": "^1.4.1",
     "@angular/common": "^4.4.0-RC.0",
     "@angular/compiler": "^4.4.0-RC.0",
+    "@angular/compiler-cli": "^4.4.0-RC.0",
     "@angular/core": "^4.4.0-RC.0",
     "@angular/forms": "^4.4.0-RC.0",
     "@angular/http": "^4.4.0-RC.0",
@@ -51,10 +52,11 @@
     "font-awesome": "^4.7.0",
     "ngx-bootstrap": "^1.9.3",
     "rxjs": "^5.4.3",
+    "ts-node": "^3.3.0",
+    "typescript": "2.3.2",
     "zone.js": "^0.8.17"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^4.4.0-RC.0",
     "@types/body-parser": "^1.16.5",
     "@types/chai": "^4.0.4",
     "@types/chai-as-promised": "^0.0.31",
@@ -88,9 +90,7 @@
     "protractor": "^5.1.2",
     "protractor-cucumber-framework": "^4.0.4",
     "reflect-metadata": "^0.1.10",
-    "ts-node": "^3.3.0",
     "tslint": "^5.7.0",
-    "typescript": "2.3.2",
     "winston": "^2.3.1"
   }
 }
