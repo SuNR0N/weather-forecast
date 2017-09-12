@@ -1,10 +1,11 @@
 <div class="wrapper">
-        <input [(ngModel)]="asyncSelected"
+        <input id="typeahead" 
+                [(ngModel)]="asyncSelected"
                 [typeahead]="dataSource"
                 (typeaheadLoading)="changeTypeaheadLoading($event)"
                 (typeaheadNoResults)="changeTypeaheadNoResults($event)"
                 (typeaheadOnSelect)="typeaheadOnSelect($event)"
-                typeaheadOptionsLimit="7"
+                typeaheadOptionsLimit="10"
                 typeaheadWaitMs="250"
                 typeaheadOptionField="name"
                 typeaheadGroupField="country"
@@ -14,6 +15,7 @@
            aria-hidden="true"
            *ngIf="typeaheadLoading"></i>
 </div>
-<div *ngIf="typeaheadNoResults">
+<div id="typeaheadNoResults" 
+     *ngIf="typeaheadNoResults">
         <i class="fa fa-times" aria-hidden="true"></i> No Results Found
 </div>

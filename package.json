@@ -26,7 +26,7 @@
     "build": "ng build",
     "test": "ng test -sm=false",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "concurrently --kill-others \"yarn server\" \"ng e2e --proxy-config config/proxy.conf.json\"",
     "server": "ts-node --project ./server/tsconfig.server.json ./server/index.ts"
   },
   "private": true,
@@ -85,7 +85,7 @@
     "reflect-metadata": "^0.1.10",
     "ts-node": "^3.3.0",
     "tslint": "^5.7.0",
-    "typescript": "^2.5.2",
+    "typescript": "2.3.2",
     "winston": "^2.3.1"
   }
 }
