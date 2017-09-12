@@ -24,7 +24,7 @@
     "ng": "ng",
     "start": "concurrently --kill-others \"yarn server\" \"ng serve --proxy-config config/proxy.conf.json\"",
     "build": "ng build",
-    "test": "ng test -sm=false",
+    "test": "ng test",
     "lint": "ng lint",
     "e2e": "concurrently --kill-others \"yarn server\" \"ng e2e --proxy-config config/proxy.conf.json\"",
     "server": "ts-node --project ./server/tsconfig.server.json ./server/index.ts",
