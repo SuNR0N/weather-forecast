@@ -144,23 +144,38 @@ heroku apps:rename <new-name>
 ```
 8. Move all of those `devDependencies` to `dependencies` which are required to run the application as `Heroku` will install those only:
     - `@angular/cli`
+    - `@angular/compiler-cli`
+    - `@types/body-parser`
+    - `@types/express`
+    - `@types/node`
+    - `@types/node-fetch`
+    - `@types/reflect-metadata`
+    - `@types/winston`
+    - `body-parser`
+    - `express`
+    - `http-status-codes`
+    - `inversify`
+    - `node-fetch`
+    - `reflect-metadata`
     - `ts-node`
+    - `typescript`
+    - `winston`
 9. Set logic in `Express` to serve static files from `dist/` directory
 ```typescript
-app.use(express.static(__dirname + '../dist'));
+app.use(express.static(__dirname + '/../dist'));
 ```
 10. Set `Express` to use the `PORT` environment variable by default for listening if it exists
 ```typescript
 app.listen(process.env.PORT || config.port, () => {
     logger.info(`Server app is listening on port ${process.env.PORT || config.port}!`);
-})
+});
 ```
 11. Handle default `PathLocationStrategy` of `Angular` in `Express`
 ```typescript
 import { join } from 'path';
 ...
 app.get('/*', (req: express.Request, res: express.Response) => {
-    res.sendFile(join(__dirname + '../dist/index.html'));
+    res.sendFile(join(__dirname + '/../dist/index.html'));
 });
 ```
 12. Set the API key as an environment variable on `Heroku`
