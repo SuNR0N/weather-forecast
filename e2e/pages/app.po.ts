@@ -10,7 +10,7 @@ import {
   WeatherWidgetComponent,
 } from '../components';
 
-export class WeatherForecastPage {
+export class AppPage {
   public header: ElementFinder;
   public citySelector: CitySelectorComponent;
   public weatherWidget: WeatherWidgetComponent;

@@ -57,6 +57,6 @@ export class WeatherWidgetComponent implements OnChanges {
     for (const forecasts of map.values()) {
       dailyForecasts.push(new DailyForecast(forecasts));
     }
-    return dailyForecasts;
+    return dailyForecasts.slice(0, 5);
   }
 }

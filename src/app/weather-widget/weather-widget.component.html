@@ -1,7 +1,7 @@
 <div class="weatherWidget"
       *ngIf="city">
   <div class="city">{{ city?.name }}, {{ city?.country }}</div>
-  <div>{{ dailyForecast?.day }}</div>
+  <div class="day">{{ dailyForecast?.day }}</div>
   <div class="description">{{ dailyForecast?.description }}</div>
   <div class="info">
     <div class="main">
