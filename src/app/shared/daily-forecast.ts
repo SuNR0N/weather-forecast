@@ -24,7 +24,7 @@ enum Icon {
 
 export class DailyForecast implements IDailyForecast {
     public forecasts: IForecast[];
-    private closestForecast: IForecast;
+    public closestForecast: IForecast;
 
     constructor(forecasts: IForecast[]) {
         this.forecasts = forecasts;
@@ -52,7 +52,7 @@ export class DailyForecast implements IDailyForecast {
 
     public get icon(): string {
         if (this.closestForecast && this.closestForecast.weather[0]) {
-            return Icon[this.closestForecast.weather[0].main];
+            return Icon[this.closestForecast.weather[0].main] || '';
         } else {
             return '';
         }
@@ -159,7 +159,7 @@ export class DailyForecast implements IDailyForecast {
                 m = value;
             }
         }
-        return Icon[m];
+        return Icon[m] || '';
     }
 
     private getClosestForecast(): IForecast {
