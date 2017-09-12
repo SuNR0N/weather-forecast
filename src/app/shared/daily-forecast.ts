@@ -15,12 +15,12 @@ const days = [
 const mpsToMphConversionRate = 2.236936;
 const kelvin = 273.15;
 
-enum Icon {
-    Rain = 'fa-tint',
-    Clouds = 'fa-cloud',
-    Clear = 'fa-sun-o',
-    Snow = 'fa-snowflake-o',
-}
+const iconMap: Map<string, string> = new Map([
+    ['Rain', 'fa-tint'],
+    ['Clouds', 'fa-cloud'],
+    ['Clear', 'fa-sun-o'],
+    ['Snow', 'fa-snowflake-o'],
+]);
 
 export class DailyForecast implements IDailyForecast {
     public forecasts: IForecast[];
@@ -52,7 +52,7 @@ export class DailyForecast implements IDailyForecast {
 
     public get icon(): string {
         if (this.closestForecast && this.closestForecast.weather[0]) {
-            return Icon[this.closestForecast.weather[0].main] || '';
+            return iconMap.get(this.closestForecast.weather[0].main) || '';
         } else {
             return '';
         }
@@ -159,7 +159,7 @@ export class DailyForecast implements IDailyForecast {
                 m = value;
             }
         }
-        return Icon[m] || '';
+        return iconMap.get(m) || '';
     }
 
     private getClosestForecast(): IForecast {
