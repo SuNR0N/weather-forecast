@@ -42,6 +42,14 @@ export class WeatherWidgetComponent implements OnChanges {
     this.dailyForecast = forecast;
   }
 
+  public get icon(): string {
+    if (!this.dailyForecast) {
+      return '';
+    } else {
+      return this.dailyForecast.isToday() ? this.dailyForecast.icon : this.dailyForecast.mainIcon;
+    }
+  }
+
   private getDailyForecasts(cityForecast: ICityForecast): DailyForecast[] {
     const map: Map<String, IForecast[]> = new Map();
     cityForecast.list.forEach((forecast) => {

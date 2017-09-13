@@ -6,7 +6,7 @@
   <div class="info">
     <div class="main">
       <i class="fa fa-3x"
-         [ngClass]="dailyForecast?.icon"></i>
+         [ngClass]="icon"></i>
       <div class="temperature">
         <span *ngIf="dailyForecast?.isToday()">{{ dailyForecast?.temperature }}</span>
         <span *ngIf="!dailyForecast?.isToday()">{{ dailyForecast?.avgTemperature }}</span>
