@@ -29,6 +29,8 @@ Once you have your own API key you need to store it as an environment variable i
 export FORECAST_API_KEY=<Your OpenWeatherMap API Key>
 ```
 
+A globally installed `yarn` is required as `concurrently` relies on it within the `start` and `e2e` scripts.
+
 ### Install
 
 You can install the project dependencies with your favourite package manager ([yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/)).
@@ -115,7 +117,7 @@ npm run server
 
 ## Hosted Application
 
-[Weather Forecast Application]() @ `Heroku`
+[Weather Forecast Application](https://weather-forecast-demo.herokuapp.com/) @ `Heroku`
 
 ### How to deploy to Heroku
 
@@ -160,17 +162,24 @@ heroku apps:rename <new-name>
     - `ts-node`
     - `typescript`
     - `winston`
-9. Set logic in `Express` to serve static files from `dist/` directory
+9. Set `engines` property in `package.json`
+```json
+"engines": {
+    "node": "8.2.1",
+    "yarn": "0.27.5"
+}
+```
+10. Set logic in `Express` to serve static files from `dist/` directory
 ```typescript
 app.use(express.static(__dirname + '/../dist'));
 ```
-10. Set `Express` to use the `PORT` environment variable by default for listening if it exists
+11. Set `Express` to use the `PORT` environment variable by default for listening if it exists
 ```typescript
 app.listen(process.env.PORT || config.port, () => {
     logger.info(`Server app is listening on port ${process.env.PORT || config.port}!`);
 });
 ```
-11. Handle default `PathLocationStrategy` of `Angular` in `Express`
+12. Handle default `PathLocationStrategy` of `Angular` in `Express`
 ```typescript
 import { join } from 'path';
 ...
@@ -178,11 +187,15 @@ app.get('/*', (req: express.Request, res: express.Response) => {
     res.sendFile(join(__dirname + '/../dist/index.html'));
 });
 ```
-12. Set the API key as an environment variable on `Heroku`
+13. Set the API key as an environment variable on `Heroku`
 ```sh
 heroku config:set FORECAST_API_KEY=<Your OpenWeatherMap API Key>
 ```
-13. Push to `Heroku` to deploy the application
+14. Create a `Procfile` to redefine startup command on `Heroku`
+```
+web: yarn server
+```
+15. Push to `Heroku` to deploy the application
 ```sh
 git add .
 git commit -m "Deploy to Heroku"
