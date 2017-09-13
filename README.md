@@ -6,6 +6,8 @@ Used Technologies & Tools:
 - [Angular](https://angular.io/)
 - [Angular CLI](https://cli.angular.io/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+- [ngx-bootstrap](https://valor-software.com/ngx-bootstrap/index-bs4.html#/)
 - [Sass](http://sass-lang.com/)
 - [Node.js](https://nodejs.org/)
 - [Express](https://expressjs.com/)
